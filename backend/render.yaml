@@ -4,5 +4,5 @@ services:
     name: backend-service
     env: python
     plan: free  # Adjust as needed
-    buildCommand: "npm run build"
-    startCommand: "npm start"
+    buildCommand: "npm install"
+    startCommand: "node index.js"
