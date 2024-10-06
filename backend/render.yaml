@@ -1,0 +1,8 @@
+
+services:
+  - type: web
+    name: backend-service
+    env: python
+    plan: free  # Adjust as needed
+    buildCommand: "npm install"
+    startCommand: "node index.js"
