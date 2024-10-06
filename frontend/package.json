@@ -1,0 +1,12 @@
+{
+  "name": "frontend-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run build",
+    "start": "npm start"
+  },
+  "dependencies": {
+    "backend": "latest",
+    "frontend": "latest"
+  }
+}
