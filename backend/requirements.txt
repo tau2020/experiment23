@@ -1,2 +1,1 @@
-backend
-frontend
+Flask==2.0.1

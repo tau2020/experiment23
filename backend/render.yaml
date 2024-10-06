@@ -4,5 +4,5 @@ services:
     name: backend-service
     env: python
     plan: free
-    buildCommand: "npm install"
-    startCommand: "npm start"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
