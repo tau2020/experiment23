@@ -4,5 +4,5 @@ services:
     name: backend-service
     env: python
     plan: free
-    buildCommand: "pip install Flask Flask-SQLAlchemy Flask-Bcrypt Flask-CORS"
-    startCommand: "python app.py"
+    buildCommand: "npm install"
+    startCommand: "npm start"
