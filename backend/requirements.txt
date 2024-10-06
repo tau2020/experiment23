@@ -1,2 +1,4 @@
-backend
-frontend
+flask
+flask-cors
+react
+react-dom
