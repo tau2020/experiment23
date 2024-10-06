@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "latest",
     "react-dom": "latest",
-    "axios": "latest"
+    "axios": "latest",
+    "prop-types": "latest"
   }
 }
