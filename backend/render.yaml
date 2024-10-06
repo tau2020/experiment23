@@ -4,5 +4,5 @@ services:
     name: backend-service
     env: python
     plan: free  # Adjust as needed
-    buildCommand: "npm install"
-    startCommand: "node index.js"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python reporting.py"
