@@ -2,12 +2,11 @@
   "name": "frontend-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm run build",
+    "build": "npm install",
     "start": "npm start"
   },
   "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
-    "axios": "latest"
+    "backend": "latest",
+    "frontend": "latest"
   }
 }
