@@ -1,2 +1,4 @@
-backend
-frontend
+flask
+flask_sqlalchemy
+react
+react-dom
