@@ -4,5 +4,5 @@ services:
     name: backend-service
     env: python
     plan: free  # Adjust as needed
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python reporting.py"
+    buildCommand: "echo 'No build required'"
+    startCommand: "python notification_service.py"
