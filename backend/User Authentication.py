@@ -2,52 +2,54 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const app = express();
-const PORT = 3000;
+const mongoose = require('mongoose');
 
+const app = express();
 app.use(bodyParser.json());
 
-const users = {}; // In-memory user store
-const SECRET_KEY = 'your_secret_key'; // Replace with your secret key
+const UserSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  email: { type: String, required: true, unique: true }
+});
 
-// User Registration
+const User = mongoose.model('User', UserSchema);
+
+const JWT_SECRET = 'your_jwt_secret';
+
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
-    if (users[username]) {
-        return res.status(400).json({ message: 'User already exists' });
-    }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    users[username] = { password: hashedPassword };
-    res.status(201).json({ message: 'User registered successfully' });
+  const { username, password, email } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = new User({ username, password: hashedPassword, email });
+  await user.save();
+  res.status(201).json({ message: 'User registered successfully' });
 });
 
-// User Login
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    const user = users[username];
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: 'Invalid credentials' });
-    }
-    const authToken = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ auth_token: authToken, user_info: { username } });
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({ message: 'Invalid credentials' });
+  }
+  const authToken = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+  res.json({ authToken, userProfile: { username: user.username, email: user.email } });
 });
 
-// Middleware to authenticate token
-const authenticateToken = (req, res, next) => {
-    const token = req.headers['authorization'] && req.headers['authorization'].split(' ')[1];
-    if (!token) return res.sendStatus(401);
-    jwt.verify(token, SECRET_KEY, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
+app.get('/profile', async (req, res) => {
+  const token = req.headers['authorization'];
+  if (!token) return res.status(403).json({ message: 'No token provided' });
+  jwt.verify(token, JWT_SECRET, async (err, decoded) => {
+    if (err) return res.status(500).json({ message: 'Failed to authenticate token' });
+    const user = await User.findById(decoded.id);
+    res.json({ username: user.username, email: user.email });
+  });
+});
+
+const PORT = process.env.PORT || 3000;
+mongoose.connect('mongodb://localhost:27017/user_auth', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
     });
-};
-
-// Example of a protected route
-app.get('/protected', authenticateToken, (req, res) => {
-    res.json({ message: 'This is a protected route', user: req.user });
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+  })
+  .catch(err => console.error(err));

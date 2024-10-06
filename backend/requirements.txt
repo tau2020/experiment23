@@ -1,2 +1,5 @@
-time
-json
+express
+body-parser
+jsonwebtoken
+bcrypt
+mongoose
