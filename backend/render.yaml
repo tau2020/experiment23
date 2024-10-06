@@ -5,4 +5,4 @@ services:
     env: python
     plan: free  # Adjust as needed
     buildCommand: "npm install"
-    startCommand: "node app.js"
+    startCommand: "node index.js"
