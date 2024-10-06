@@ -1,0 +1,14 @@
+{
+  "name": "frontend-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run build",
+    "start": "flask run"
+  },
+  "dependencies": {
+    "flask": "latest",
+    "requests": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
