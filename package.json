@@ -1,0 +1,9 @@
+{
+  "name": "frontend-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm build",
+    "start": "npm serve"
+  },
+  "dependencies": {}
+}
