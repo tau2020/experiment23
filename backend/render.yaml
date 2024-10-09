@@ -5,7 +5,7 @@ services:
     env: python
     plan: free
     buildCommand: ./build.sh
-    startCommand: gunicorn API Server:app
+    startCommand: gunicorn Database:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
