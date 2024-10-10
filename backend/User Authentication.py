@@ -24,22 +24,22 @@ def register():
     new_user = User(username=data['username'], email=data['email'], password=hashed_password)
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({'message': 'User registered successfully'}), 201
+    return jsonify(message='User registered successfully'), 201
 
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     user = User.query.filter_by(username=data['username']).first()
     if user and bcrypt.check_password_hash(user.password, data['password']):
-        access_token = create_access_token(identity={'username': user.username, 'email': user.email})
-        return jsonify({'authToken': access_token, 'userProfile': {'username': user.username, 'email': user.email}}), 200
-    return jsonify({'message': 'Invalid credentials'}), 401
+        access_token = create_access_token(identity={'username': user.username})
+        return jsonify(auth_token=access_token, user_profile={'username': user.username, 'email': user.email})
+    return jsonify(message='Invalid credentials'), 401
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected():
     current_user = get_jwt_identity()
-    return jsonify({'logged_in_as': current_user}), 200
+    return jsonify(logged_in_as=current_user), 200
 
 if __name__ == '__main__':
     db.create_all()
@@ -55,36 +55,36 @@ const App = () => {
     const [userProfile, setUserProfile] = useState({});
 
     const handleRegister = async () => {
-        const response = await fetch('http://localhost:5000/register', {
+        const response = await fetch('/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, email })
         });
         const data = await response.json();
-        console.log(data);
+        alert(data.message);
     };
 
     const handleLogin = async () => {
-        const response = await fetch('http://localhost:5000/login', {
+        const response = await fetch('/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
         });
         const data = await response.json();
         if (response.ok) {
-            setAuthToken(data.authToken);
-            setUserProfile(data.userProfile);
+            setAuthToken(data.auth_token);
+            setUserProfile(data.user_profile);
         } else {
-            console.error(data.message);
+            alert(data.message);
         }
     };
 
     return (
         <div>
             <h1>User Authentication</h1>
-            <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
-            <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
-            <input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type='text' placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
+            <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+            <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
             <button onClick={handleRegister}>Register</button>
             <button onClick={handleLogin}>Login</button>
             {authToken && <div>Auth Token: {authToken}</div>}
