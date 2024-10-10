@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "npm install",
-    "start": "npm start"
+    "start": "flask run"
   },
   "dependencies": {
     "react": "^18.3.1",
