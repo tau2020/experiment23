@@ -1,14 +1,12 @@
 
-[build]
-  command = "./build.sh"
-  publish = "build"
+                [build]
+                command = "./build.sh"
+                publish = "build"
 
-[context.production.environment]
-  NODE_ENV = "production"
+                [context.production.environment]
+                NODE_ENV = "production"
 
-[build.environment]
-  NODE_VERSION = "18.18.2"
-  NODE_OPTIONS = "--max_old_space_size=4096"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+                [build.environment]
+                NODE_VERSION = "18.18.2"
+                NODE_OPTIONS = "--max_old_space_size=4096"
+                

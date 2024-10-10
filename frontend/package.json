@@ -9,8 +9,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.69.5",
-    "frontend": "latest",
-    "backend": "latest"
+    "backend": "latest",
+    "frontend": "latest"
   },
   "devDependencies": {
     "react-scripts": "^5.0.1"
