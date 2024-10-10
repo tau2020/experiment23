@@ -2,8 +2,8 @@
   "name": "frontend-app",
   "version": "1.0.0",
   "scripts": {
-    "build": "npm install && npm run build",
-    "start": "flask run"
+    "build": "npm install",
+    "start": "npm start"
   },
   "dependencies": {
     "react": "^18.3.1",
