@@ -2,59 +2,48 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Mock database for user profiles
-user_profiles = {}  # userId: profileData
+# In-memory storage for user profiles
+user_profiles = {}
 
-@app.route('/api/user/<userId>', methods=['GET', 'PUT'])
-def user_profile(userId):
-    if request.method == 'GET':
-        profile = user_profiles.get(userId, None)
-        if profile:
-            return jsonify(profile), 200
-        else:
-            return jsonify({'error': 'User not found'}), 404
-    elif request.method == 'PUT':
+@app.route('/api/user_profile/<user_id>', methods=['GET', 'POST'])
+def manage_user_profile(user_id):
+    if request.method == 'POST':
         profile_data = request.json
-        user_profiles[userId] = profile_data
-        return jsonify(profile_data), 200
+        user_profiles[user_id] = profile_data
+        return jsonify({'updated_profile': user_profiles[user_id]}), 200
+    elif request.method == 'GET':
+        return jsonify({'profile_data': user_profiles.get(user_id, {})}), 200
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
 
-// Frontend code (React.js)
 import React, { useState, useEffect } from 'react';
 
 const UserProfile = ({ userId }) => {
     const [profileData, setProfileData] = useState({});
 
     useEffect(() => {
-        fetch(`/api/user/${userId}`)
+        fetch(`/api/user_profile/${userId}`)
             .then(response => response.json())
-            .then(data => setProfileData(data));
+            .then(data => setProfileData(data.profile_data));
     }, [userId]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProfileData({ ...profileData, [name]: value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetch(`/api/user/${userId}`, {
-            method: 'PUT',
+    const updateProfile = (newData) => {
+        fetch(`/api/user_profile/${userId}`, {
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(profileData),
+            body: JSON.stringify(newData),
         })
             .then(response => response.json())
-            .then(data => setProfileData(data));
+            .then(data => setProfileData(data.updated_profile));
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type='text' name='name' value={profileData.name || ''} onChange={handleChange} placeholder='Name' />
-            <input type='email' name='email' value={profileData.email || ''} onChange={handleChange} placeholder='Email' />
-            <button type='submit'>Update Profile</button>
-        </form>
+        <div>
+            <h1>User Profile</h1>
+            <pre>{JSON.stringify(profileData, null, 2)}</pre>
+            <button onClick={() => updateProfile({ preferences: 'new preferences', readingHistory: [], bookmarks: [] })}>Update Profile</button>
+        </div>
     );
 };
 
