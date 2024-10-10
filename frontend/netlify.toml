@@ -1,0 +1,8 @@
+
+[build]
+  command = "npm install && ionic build"
+  publish = "frontend-app/www"
+  environment = { NODE_VERSION = "14.17.0" }
+
+[context.production.environment]
+  NODE_ENV = "production"
