@@ -5,7 +5,7 @@
                 env: python
                 plan: free
                 buildCommand: pip install -r requirements.txt
-                startCommand: gunicorn User Database:app
+                startCommand: gunicorn Content Management System (CMS):app
                 envVars:
                 - key: PYTHON_VERSION
                     value: 3.9.0
