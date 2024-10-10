@@ -5,7 +5,7 @@
                 env: python
                 plan: free
                 buildCommand: pip install -r requirements.txt
-                startCommand: gunicorn API Layer:app
+                startCommand: gunicorn Authentication Module:app
                 envVars:
                 - key: PYTHON_VERSION
                     value: 3.9.0
