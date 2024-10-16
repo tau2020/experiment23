@@ -14,10 +14,10 @@
         COPY . .
 
         # Build the application
-        RUN echo 'No build step required'
+        RUN npm run build
 
         # Expose the port the app runs on
         EXPOSE 3000
 
         # Define the command to run your app
-        CMD ["node index.js"]
+        CMD ["npm start"]

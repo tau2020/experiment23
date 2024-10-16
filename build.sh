@@ -1,3 +1,3 @@
 
 #!/bin/bash
-echo 'No build step required'
+npm run build
