@@ -5,7 +5,7 @@ services:
                                     region: oregon
                                     branch: develop
                                     buildCommand: 'echo 'No build step required''
-                                    startCommand: 'npm start'
+                                    startCommand: 'node index.js'
                                     plan: starter
                                     autoDeploy: true
                                     envVars:
