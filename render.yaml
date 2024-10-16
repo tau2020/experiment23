@@ -1,0 +1,13 @@
+services:
+                                - type: web
+                                    name: unified-app
+                                    env: node
+                                    region: oregon
+                                    branch: develop
+                                    buildCommand: 'echo 'No build step required''
+                                    startCommand: 'npm start'
+                                    plan: starter
+                                    autoDeploy: true
+                                    envVars:
+                                    - key: NODE_ENV
+                                        value: production
