@@ -14,7 +14,7 @@
         COPY . .
 
         # Build the application
-        RUN npm run build
+        RUN echo 'No build step required'
 
         # Expose the port the app runs on
         EXPOSE 3000

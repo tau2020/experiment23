@@ -1,34 +1,19 @@
-# API Client
+# Authentication Service
 
 ## Overview
-The API Client component facilitates communication between the frontend and backend using Axios for making REST API calls.
+This service manages user authentication and authorization for admin access using JWT and bcrypt.
 
 ## Installation
-To install the necessary dependencies, run:
-```
-npm install
-```
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Create a `.env` file with the following variables:
+   - `JWT_SECRET`: Your secret key for JWT.
+   - `MONGODB_URI`: Your MongoDB connection string.
+   - `PORT`: (Optional) Port number to run the server.
 
 ## Usage
-Import the APIClient in your components to make API calls:
-```javascript
-import APIClient from './apiClient';
-
-APIClient.get('/endpoint')
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-```
+- To register a user, send a POST request to `/api/auth/register` with a JSON body containing `username` and `password`.
+- To log in, send a POST request to `/api/auth/login` with a JSON body containing `username` and `password`. You will receive a JWT token in response.
 
 ## Deployment Commands
-To build the application for production, run:
-```
-npm run build
-```
-
-To start the application in development mode, run:
-```
-npm start
-```
-
-## Additional Information
-Ensure that the environment variable `REACT_APP_API_URL` is set to your backend API URL.
+- To start the application, run `npm start`.

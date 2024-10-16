@@ -1,17 +1,16 @@
 {
-  "name": "api-client",
+  "name": "authentication-service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "echo 'No build step required'",
+    "start": "node src/server.js"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
+    "bcrypt": "^5.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.22"
   }
 }

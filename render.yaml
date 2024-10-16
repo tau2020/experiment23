@@ -4,7 +4,7 @@ services:
                                     env: node
                                     region: oregon
                                     branch: develop
-                                    buildCommand: 'npm run build'
+                                    buildCommand: 'echo 'No build step required''
                                     startCommand: 'npm start'
                                     plan: starter
                                     autoDeploy: true
