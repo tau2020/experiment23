@@ -1,18 +1,18 @@
-# Notification System
+# User Dashboard
 
 ## Installation
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
 
 ## Running the Application
-1. Start the MongoDB service using Docker: `docker-compose up -d`
-2. Start the application: `npm start`
+1. Run `npm start` to start the application.
+2. Open your browser and go to `http://localhost:3000`.
 
-## API Endpoints
-- `POST /api/notifications`: Create a notification.
-- `GET /api/notifications/:userId`: Get notifications for a user.
-- `PATCH /api/notifications/opt-in/:userId`: Opt-in for notifications.
-- `PATCH /api/notifications/opt-out/:userId`: Opt-out of notifications.
+## Docker
+To run the application with Docker:
+1. Run `docker-compose up`.
 
-## Running Tests
-Run `npm test` to execute the tests.
+## Features
+- Displays user information and billing history.
+- Responsive design.
+- Navigation between sections.
