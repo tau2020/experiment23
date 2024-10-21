@@ -1,18 +1,18 @@
-# User Dashboard
+# Invoice Management System
 
 ## Installation
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
 
 ## Running the Application
-1. Run `npm start` to start the application.
-2. Open your browser and go to `http://localhost:3000`.
+1. Start the MongoDB service using Docker: `docker-compose up -d`
+2. Start the application: `npm start`
+3. Access the API at `http://localhost:3000`
 
-## Docker
-To run the application with Docker:
-1. Run `docker-compose up`.
+## API Endpoints
+- `GET /invoices/:userId`: View invoices for a user.
+- `POST /invoices`: Generate an invoice after payment.
+- `POST /invoices/reprint/:invoiceId`: Request an invoice reprint.
 
-## Features
-- Displays user information and billing history.
-- Responsive design.
-- Navigation between sections.
+## Running Tests
+Run `npm test` to execute the tests.

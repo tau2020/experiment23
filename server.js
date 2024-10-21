@@ -1,36 +1,30 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const Invoice = require('./models/invoice');
 
 const app = express();
-app.use(express.json());
-app.use(session({
-  secret: 'your_secret_key',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/userlogin', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/invoice_management', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const UserSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+app.get('/invoices/:userId', async (req, res) => {
+    const invoices = await Invoice.find({ userId: req.params.userId });
+    res.json(invoices);
 });
 
-const User = mongoose.model('User', UserSchema);
+app.post('/invoices', async (req, res) => {
+    const invoice = new Invoice(req.body);
+    await invoice.save();
+    res.status(201).send(invoice);
+});
 
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
-  if (!user) return res.status(401).send('Invalid credentials');
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(401).send('Invalid credentials');
-  req.session.userId = user._id;
-  res.send('Login successful');
+app.post('/invoices/reprint/:invoiceId', async (req, res) => {
+    const invoice = await Invoice.findById(req.params.invoiceId);
+    // Logic to send invoice via email or download link
+    res.send('Invoice reprint requested.');
 });
 
 app.listen(3000, () => {
-  console.log('Server running on port 3000');
+    console.log('Server is running on port 3000');
 });

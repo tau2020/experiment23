@@ -4,11 +4,13 @@ services:
     build: .
     ports:
       - '3000:3000'
-  db:
-    image: postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: dashboard_db
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
     ports:
-      - '5432:5432'
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+volumes:
+  mongo_data:
