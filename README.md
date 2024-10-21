@@ -1,18 +1,18 @@
-# Invoice Management System
+# Car Inventory Management
 
 ## Installation
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
 
 ## Running the Application
-1. Start the MongoDB service using Docker: `docker-compose up -d`
-2. Start the application: `npm start`
-3. Access the API at `http://localhost:3000`
+1. Use `npm start` to start the server.
+2. Use `docker-compose up` to run the application with Docker.
 
 ## API Endpoints
-- `GET /invoices/:userId`: View invoices for a user.
-- `POST /invoices`: Generate an invoice after payment.
-- `POST /invoices/reprint/:invoiceId`: Request an invoice reprint.
+- `POST /cars`: Add a new car listing.
+- `PUT /cars/:id`: Edit a car listing.
+- `DELETE /cars/:id`: Delete a car listing.
+- `GET /cars`: View all available cars.
 
-## Running Tests
+## Testing
 Run `npm test` to execute the tests.

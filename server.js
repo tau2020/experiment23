@@ -1,30 +1,45 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Invoice = require('./models/invoice');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost/invoice_management', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://mongo:27017/carInventory', { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.get('/invoices/:userId', async (req, res) => {
-    const invoices = await Invoice.find({ userId: req.params.userId });
-    res.json(invoices);
+const carSchema = new mongoose.Schema({
+  make: String,
+  model: String,
+  year: Number,
+  price: Number
 });
 
-app.post('/invoices', async (req, res) => {
-    const invoice = new Invoice(req.body);
-    await invoice.save();
-    res.status(201).send(invoice);
+const Car = mongoose.model('Car', carSchema);
+
+app.post('/cars', async (req, res) => {
+  const car = new Car(req.body);
+  await car.save();
+  res.status(201).send(car);
 });
 
-app.post('/invoices/reprint/:invoiceId', async (req, res) => {
-    const invoice = await Invoice.findById(req.params.invoiceId);
-    // Logic to send invoice via email or download link
-    res.send('Invoice reprint requested.');
+app.put('/cars/:id', async (req, res) => {
+  const car = await Car.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.send(car);
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.delete('/cars/:id', async (req, res) => {
+  await Car.findByIdAndDelete(req.params.id);
+  res.status(204).send();
+});
+
+app.get('/cars', async (req, res) => {
+  const cars = await Car.find();
+  res.send(cars);
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
