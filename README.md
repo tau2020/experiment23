@@ -1,16 +1,27 @@
-# User Login Application
+# Payment Processing Application
+
+## Description
+This application allows users to make payments through various methods such as credit card and PayPal. It securely processes transactions and provides confirmation of payments.
 
 ## Installation
 1. Clone the repository.
-2. Run `npm install` to install dependencies.
+2. Navigate to the project directory.
+3. Run `npm install` to install dependencies.
 
 ## Running the Application
-1. Start the MongoDB service (if not using Docker).
-2. Run `npm start` to start the application.
+To start the application, run:
+```bash
+npm start
+```
+
+## Running with Docker
+To build and run the application with Docker, use:
+```bash
+docker-compose up
+```
 
 ## Running Tests
-Run `npm test` to execute the tests.
-
-## Docker
-To run the application with Docker, use:
-1. `docker-compose up`
+To run the tests, use:
+```bash
+npm test
+```

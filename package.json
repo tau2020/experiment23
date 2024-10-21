@@ -1,19 +1,19 @@
 {
-  "name": "user-login",
+  "name": "payment-processing",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "jest"
+    "start": "node src/index.js",
+    "test": "jest",
+    "docker:build": "docker build -t payment-processing .",
+    "docker:up": "docker-compose up"
   },
   "dependencies": {
     "express": "^4.17.1",
-    "bcrypt": "^5.0.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.9",
-    "express-session": "^1.17.1"
+    "body-parser": "^1.19.0"
   },
   "devDependencies": {
-    "jest": "^26.6.0"
+    "jest": "^26.6.0",
+    "supertest": "^6.1.0"
   }
 }

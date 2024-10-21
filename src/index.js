@@ -1,10 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const reportRoutes = require('./routes/reportRoutes');
+const paymentRoutes = require('./routes/payment');
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/api/reports', reportRoutes);
+app.use('/api/payments', paymentRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
