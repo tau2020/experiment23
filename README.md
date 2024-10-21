@@ -1,18 +1,24 @@
-# Car Inventory Management
+# User Profile Management
 
 ## Installation
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
 
 ## Running the Application
-1. Use `npm start` to start the server.
-2. Use `docker-compose up` to run the application with Docker.
+1. Start the MongoDB service using Docker:
+   ```bash
+   docker-compose up -d
+   ```
+2. Start the application:
+   ```bash
+   npm start
+   ```
 
 ## API Endpoints
-- `POST /cars`: Add a new car listing.
-- `PUT /cars/:id`: Edit a car listing.
-- `DELETE /cars/:id`: Delete a car listing.
-- `GET /cars`: View all available cars.
+- `PUT /api/users/:id` - Update user profile.
 
 ## Testing
-Run `npm test` to execute the tests.
+Run tests using:
+```bash
+npm test
+```
