@@ -3,12 +3,13 @@ services:
   app:
     build: .
     ports:
-      - '5000:5000'
-    volumes:
-      - .:/usr/src/app
+      - '3000:3000'
     depends_on:
-      - mongo
-  mongo:
-    image: mongo
+      - db
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sales_db
     ports:
-      - '27017:27017'
+      - '3306:3306'

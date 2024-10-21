@@ -1,16 +1,19 @@
-# Car Billing Application
+# Sales Reporting Feature
 
 ## Installation
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
+3. Set up the database using the provided `docker-compose.yml`.
 
 ## Running the Application
-1. Start MongoDB using Docker: `docker-compose up -d`
-2. Start the application: `npm start`
+- To start the application, run `npm start`.
+- To run tests, use `npm test`.
 
 ## API Endpoints
-- `POST /api/bills`: Generate a bill for a car purchase.
-- `GET /api/bills/:id/download`: Download the bill as a PDF.
+### Generate Report
+- **POST** `/api/reports/generate`
+- **Body:** `{ startDate: 'YYYY-MM-DD', endDate: 'YYYY-MM-DD', carModel: 'Model Name' }`
+- **Response:** CSV file download.
 
-## Testing
-Run `npm test` to execute the tests.
+## Docker
+- To run the application with Docker, use `docker-compose up`.
