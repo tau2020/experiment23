@@ -5,11 +5,8 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - db
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: sales_db
+      - mongo
+  mongo:
+    image: mongo
     ports:
-      - '3306:3306'
+      - '27017:27017'

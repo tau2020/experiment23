@@ -1,19 +1,16 @@
-# Sales Reporting Feature
+# User Login Application
 
 ## Installation
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
-3. Set up the database using the provided `docker-compose.yml`.
 
 ## Running the Application
-- To start the application, run `npm start`.
-- To run tests, use `npm test`.
+1. Start the MongoDB service (if not using Docker).
+2. Run `npm start` to start the application.
 
-## API Endpoints
-### Generate Report
-- **POST** `/api/reports/generate`
-- **Body:** `{ startDate: 'YYYY-MM-DD', endDate: 'YYYY-MM-DD', carModel: 'Model Name' }`
-- **Response:** CSV file download.
+## Running Tests
+Run `npm test` to execute the tests.
 
 ## Docker
-- To run the application with Docker, use `docker-compose up`.
+To run the application with Docker, use:
+1. `docker-compose up`
